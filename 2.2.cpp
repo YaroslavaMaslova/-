@@ -3,19 +3,17 @@
 #include <cmath>
 int main()
 {
-double x, y, a, b, s;
-a = 2.1;
-std::cout<<"введите число ";
-std::cin >> x;
-if (x < 4 )
+double number, y, a;
+a = 2.1; //вводим константу, указанную в задаче//
+std::cout<<"введите число "; //просим ввести переменную//
+std::cin >> number;
+if (number < 4 ) //выясняем, что число больше 4//
 {
-a = a / x;
-y = a + pow(x,2);
+y =pow(number,2)+a/number;//да, используем одну формулу//
 }
 else
 {
-a = a * x;
-y = a + pow(x,3);
+y =a*number+pow(number,3);//нет, другую//
 }
-std::cout<<" y = " <<y;
+std::cout<<" y = " <<y;//выводим чему равна функция//
 }
