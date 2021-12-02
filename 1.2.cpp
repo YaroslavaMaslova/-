@@ -1,37 +1,14 @@
 #include <iostream>
-#define _USE_MATH_DEFINES // for C++
 #include <cmath>
 int main()
 {
-double x, y, a, b, s;
-std::cout<<"Какую площадь нужно вычислить? " << std::endl<<"1 прямоугольник"<< std::endl<<"2 треугольник"<< std::endl; //спрашиваем какую именно площадь надо найти //
-std::cin >> x;
-if (x == 1)
-{
-std::cout << "Введите сторону а: "; //просим ввести стороны//
-std::cin >> a;
-std::cout << "Введите сторону b: ";
-std::cin >> b;
-s = a * b; //вычисляем площадь по формуле//
-std::cout<<"площадь квадрата = " <<s; //выводим значение площади//
-} else
-{
-std::cout << "Какой треугольник? "<< std::endl<< "1 прямоугольный"<< std::endl<<" 2 правильный "<< std::endl; //уточняем какого именно треугольника//
-std::cin >> y;
-if (y == 1)
-{
-std::cout << "Введите первый катет ";//просим ввести стороны//
-std::cin >> a;
-std::cout << "Введите второй катет ";
-std::cin >> b;
-s = a * b / 2; //вычисляем площадь по формуле//
-std::cout<<"площадь прямоугольного тряугольника = " <<s; //выводим значение площади//
-} else
-{
-std::cout << "Введите основание треугольника "; //просим ввести сторону//
-std::cin >> a; 
-s = pow(a,2) * sqrt(3)/4; //вычисляем площадь по формуле//
-std::cout<<"площадь правильного тряугольника = " <<s; //выводим значение площади//
-}
-}
+    double first_side;
+    std::cout << "Введите первую сторону: "; 
+    std::cin >> first_side;
+    double second_side;
+    std::cout << "Введите вторую сторону: ";
+    std::cin >> second_side;
+    double rectangular_square = second_side*first_side;
+    double area_triangle =second_side*first_side/2;
+    std::cout <<  "площадь прямоугольника= " << rectangular_square << ", площадь треугольника = " << area_triangle << std::endl;
 }
