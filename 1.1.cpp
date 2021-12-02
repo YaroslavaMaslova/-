@@ -11,7 +11,7 @@ int main()
     const auto a = GetA(x, y, z);
     const auto b = GetB(x, y, z);
 
-    std::cout << "x = " << x << ", y =  "<< y << ", z = " << z << "\n";
+    std::cout << " x = " << x << ", y =  "<< y << ", z = " << z << "\n";
     std::cout << "a = " << a << ", b = " << b << std::endl;
 
     return 0;
