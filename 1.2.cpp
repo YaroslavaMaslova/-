@@ -3,7 +3,7 @@
 int main()
 {
     double first_side;
-    std::cout << "Введите первую сторону: "; 
+    std::cout << "Введите первую сторону:  "; 
     std::cin >> first_side;
     double second_side;
     std::cout << "Введите вторую сторону: ";
