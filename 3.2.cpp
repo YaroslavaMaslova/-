@@ -1,5 +1,16 @@
 #include <iostream>
 #include <cmath>
+/**
+ * \brief Функция для расчета b
+ * \param k Параметр k
+ * \param z Параметр z
+ * \return 
+ */
+double Gets(const double k, const double z);
+/**
+ * \brief Точка входа в программу
+ * \return Возвращает нуль, в случае успеха
+ */
 int main()
 { 
     std::cout << "Введите число n: ";
@@ -10,18 +21,22 @@ int main()
     std::cin >> e;
     double k = 1;
     double  z = 1;
-    double sum1 = 0;
-    double summ2 = 0;
+    double sum = 0;
+    double summ = 0;
     while (k<=n)
         { 
             z = z*k;
-            double s =pow(-1,k)*k/z;
-            sum1 = sum1 +s;
+            const auto s = Gets(k, z);
+            sum = sum +s;
             if (k>=e)
                 {
-                    summ2 = summ2 + s;
+                    summ = summ + s;
                 }
             k=k+1;
         }
-    std::cout << "сумму первых  " << n << "  членов последовательности = " << sum1 << std::endl << "сумму всех членов последовательности, не меньших " << e << " = " << summ2 << std::endl;
+    std::cout << "сумму первых  " << n << "  членов последовательности = " << sum << std::endl << "сумму всех членов последовательности, не меньших " << e << " = " << summ << std::endl;
+}
+double Gets (const double k, const double z)
+{
+    return pow(-1,k)*k/z;
 }
