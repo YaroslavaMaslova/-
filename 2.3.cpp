@@ -1,5 +1,27 @@
 #include <iostream>
 #include <cmath>
+/**
+ * \brief Функция для расчета a
+ * \param a Параметр a
+ * \return 
+ */
+double GetA(const double a);
+/**
+ * \brief Функция для расчета b
+ * \param b Параметр b
+ * \return 
+ */
+double GetB(const double b);
+/**
+ * \brief Функция для расчета c
+ * \param c Параметр c
+ * \return 
+ */
+double GetC(const double c);
+/**
+ * \brief Точка входа в программу
+ * \return Возвращает нуль, в случае успеха
+ */
 int main()
 {
     std::cout << "Введите сторону а: "; 
@@ -11,14 +33,14 @@ int main()
     std::cout << "Введите сторону c: ";
     double c;
     std::cin >> c;
-    a = pow(a,2);
-    b = pow(b,2);
-    c = pow(c,2);
+    const auto a_a = GetA(a);
+    const auto b_b = GetB(b);
+    const auto c_c = GetC(c); 
     if (a > b)
         {
         if (a>c)
             {
-                if (a == b + c)
+                if (a_a -(b_b + c_c)==0)
                 {
                 std::cout<<"треугольник является прямоугольным"<< std::endl<<" гипотинузой будет сторона a ";
                 }
@@ -29,7 +51,7 @@ int main()
             }
         else
             {
-                if (c == a + b)
+                if (c_c- (a_a + b_b)==0)
                 {
                 std::cout<<"треугольник является прямоугольным"<< std::endl<<" гипотинузой будет сторона c ";
                 } 
@@ -43,7 +65,7 @@ int main()
         {
             if (b>c)
             {
-                if (b == a + c)
+                if (b_b -(a_a + c_c)==0)
                     {
                     std::cout<<"треугольник является прямоугольным"<< std::endl<<" гипотинузой будет сторона b ";
                     }
@@ -54,7 +76,7 @@ int main()
 			}
             else
             {
-                if (c == a + b)
+                if (c_c -(a_a + b_b)==0)
                     {
                     std::cout<<"треугольник является прямоугольным"<< std::endl<<" гипотинузой будет сторона c ";
                     }
@@ -65,3 +87,15 @@ int main()
 				}
 	    }
 	}
+double GetA (const double a)
+{
+    return pow(a,2);
+}
+double GetB (const double b)
+{
+    return pow(b,2);
+}
+double GetC (const double c)
+{
+    return pow(c,2);
+}
