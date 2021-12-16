@@ -2,7 +2,7 @@
 #include <cmath>
 /**
  * \brief Функция для расчета rectangular_square
- * \param first_side Параметр first_side
+ * \param first_side Параметр first_side 
  * \param second_side Параметр second_side
  * \return 
  */
