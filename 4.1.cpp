@@ -6,7 +6,7 @@ int main()
 	double sum1 = 0;
 	double sum2 = 0; 
 	double A;
-	std::cout << "Введите значение А  ";
+	std::cout << "Введите значение А ";
 	std::cin >> A;
 	for (int i = 0; i < n; i++)
 	{
