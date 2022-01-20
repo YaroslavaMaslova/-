@@ -1,31 +1,99 @@
 #include <iostream>
+#include <time.h>
+int getRandom(int start, int end)
+{
+	return start + rand() % (end - start + 1);
+}
+void choice1(int* array, int size, double element, int i);
+void choice2(int* array, int size, double element, int i);
+void summinus(int* array, int size, double sum1, int i);
+void sumplusA(int* array, int size, double sum2, int i, double A);
+void part(int* array, int size, double part1_of_a_pair, int i, double part2_of_a_pair);
 int main()
 {
-	const double n = 300; 
-	double m[n] = { -100, -99, -98, -97, -96,-95,-94,-93,-92,-91,-90,-89,-88,-87,-86,-85,-84,-83,-82,-81,-80,-79,-78,-77,-76,-75,-74,-73,-72,-71,-70,-69,-68,-67,-66,-65,-64,-63,-62,-61,-60,-59,-58,-57.-56,-55,-54,-53,-52,-51,-50,-49,-48,-47,-46,-45,-44,-43,-42,-41,-40,-39,-38,-37,-36,-35,-34,-33,-32,-31,-30,-29,-28,-27,-26,-25,-24,-23,-22,-21,-20,-19,-18,-17,-16,-15,-14,-13,-12,-11,-10,-9,-8,-7,-6,-5,-4,-3,-2,-1,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200 }; // переменная для хранения массива
-	double sum1 = 0;
-	double sum2 = 0; 
-	double A;
-	std::cout << "Введите значение А  ";
-	std::cin >> A;
-	for (int i = 0; i < n; i++)
+	std::cout << "введите количество элементов массива: ";
+	int* array;
+	int size;
+	std::cin >> size;
+	array = new int[size];
+	std::cout << "заполняем клавиатурой или рандомом?" << std::endl << "1.клавиатура " << "2.рандом ";
+	double choice;
+	std::cin >> choice;
+	double element;
+	int i;
+	if (choice == 1)
 	{
-		if (m[i] < 0)
-		{
-			sum1 += m[i];
-		} 
+		choice1(array, size, element, i);
 	}
-	for (int i = 0; i < n; i++)
+	if (choice == 2)
 	{
-		if (m[i] > 0)
+		choice2(array, size, element, i);
+	}
+	double sum1 = 0;
+	double sum2 = 0;
+	double A;
+	std::cout << "Введите значение А ";
+	std::cin >> A;
+	 summinus( array, size, sum1, i);
+	double part1_of_a_pair = 0;
+	double part2_of_a_pair;
+	part(array, size, part1_of_a_pair, i, part2_of_a_pair);
+	std::cout << " сумма отрицательных элементов = " << sum1 << std::endl << " сумма элементов, значения которых положительны и не превосходят заданного числа А = " << sum2 << "номера последней пары соседних элементов с разными знаками=" << part1_of_a_pair << ", " << part2_of_a_pair << std::endl;
+	return (0);
+}
+void choice1(int* arrayD, int size, double element, int i)
+{
+	for (i = 0; i < size;)
+	{
+		std::cin >> element;
+		arrayD[i] = element;
+		i += 1;
+	}
+}
+void choice2(int* arrayD, int size, double element, int i)
+{
+	for (int i = 0; i < size; ++i)
+	{
+		arrayD[i] = getRandom(-100, 100);
+		i += 1;
+	}
+}
+void summinus(int* array, int size, double sum1, int i)
+{
+	for (i = 0; i < size; i++)
+	{
+		if (array[i] < 0)
 		{
-			if (m[i] < A)
+			sum1 += array[i];
+		}
+	}
+}
+void sumplusA(int* array, int size, double sum2, int i, double A)
+{
+	for ( i = 0; i < size; i++)
+	{
+		if (array[i] > 0)
+		{
+			if (array[i] < A)
 			{
-				sum2 += m[i];
+				sum2 += array[i];
 			}
 		}
 	}
-	std::cout << " сумма отрицательных элементов = " << sum1 << std::endl << " сумма отрицательных элементов = " << sum2 << std::endl;
-
-	return (0);
+}
+void part(int* array, int size, double part1_of_a_pair, int i, double part2_of_a_pair)
+{
+	i = size - 1;
+	while (part1_of_a_pair == 0)
+	{
+		if (array[i] > 0)
+		{
+			part1_of_a_pair = i;
+			if (array[i - 1] < 0)
+			{
+				part2_of_a_pair = i - 1;
+			}
+		}
+		i = i - 1;
+	}
 }
