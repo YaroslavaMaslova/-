@@ -76,11 +76,10 @@ int getRandomInputArray(const size_t size, const int minValue, const int maxValu
 void keyboard(const size_t size, double element)
 {
 	int* arrayD = new int[size];
-	for (size_t i = 0; i < size;)
+	for (size_t i = 0; i < size;i++)
 	{
 		std::cin >> element;
 		arrayD[i] = element;
-		i += 1;
 	}
 }
 void maxminus(const size_t size, int max_minus, int size_i)
@@ -103,7 +102,7 @@ void newarray(  const size_t size, double k)
 {
 	int* arrayD = new int[size];
 	int* arrayA = new int[size];
-	for (size_t i = 0; i < size;)
+	for (size_t i = 0; i < size;i++)
 	{
 		if (arrayD[i] < k)
 		{
@@ -113,6 +112,5 @@ void newarray(  const size_t size, double k)
 		{
 			arrayA[i] = arrayD[i] - 1;
 		}
-		i += 1;
 	}
 }
