@@ -12,13 +12,13 @@ double get_y(const double x);
  */
 int main()
 {
-    const double k= 0.05;
-  double x = 0;
+    const double step= 0.05;
+     double x = 0;
     while ( x <= 0.86)
 		 {
         double y=get_y(x);;
         std::cout<<"x= " <<x<<"  y= " <<y <<std::endl;
-        x=x+k;
+        x=x+step;
         }
 }
 double get_y (const double x)
