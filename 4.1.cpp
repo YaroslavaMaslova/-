@@ -1,66 +1,93 @@
 #include <iostream>
-#include <time.h>
-int getRandom(int start, int end)
-{
-	return start + rand() % (end - start + 1);
-}
-void choice1(int* array, int size, double element, int i);
-void choice2(int* array, int size, double element, int i);
-void summinus(int* array, int size, double sum1, int i);
+#include <cmath>
+#include <random>
+/**
+* \brief Заполнение массива случайными числами.
+* \param size Длина массива.
+* \param minValue Минимальное значение массива.
+* \param maxValue Максимальное значение массива.
+* \return Массив.
+*/
+int getRandomInputArray(const size_t size, const int minValue = -100, const int maxValue = 200);
+/**
+* \brief Заполнение массива с помощью клавиатуры
+* \param size Длина массива.
+* \param element элемент
+* \return Массив.
+*/
+void keyboard(const size_t size, double element);
+/**
+* \brief найти сумму отрицательных чисел
+* \param sum1 сумма
+* \return sum1
+*/
+int sum_minus(int* array, const size_t size, double sum1);
+/**
+* \brief найти сумму от 0 до А
+* \param sum2 сумма
+* \param А число А
+* \return sum1
+*/
 void sumplusA(int* array, int size, double sum2, int i, double A);
+
 void part(int* array, int size, double part1_of_a_pair, int i, double part2_of_a_pair);
 int main()
 {
 	std::cout << "введите количество элементов массива: ";
 	int* array;
-	int size;
+	const size_t size
 	std::cin >> size;
 	array = new int[size];
-	std::cout << "заполняем клавиатурой или рандомом?" << std::endl << "1.клавиатура " << "2.рандом ";
+	std::cout << "заполняем клавиатурой или рандомом?" << std::endl << "1.клавиатура  " << "2.рандом ";
 	double choice;
 	std::cin >> choice;
 	double element;
 	int i;
 	if (choice == 1)
 	{
-		choice1(array, size, element, i);
+		keyboard(size, element);
 	}
 	if (choice == 2)
 	{
-		choice2(array, size, element, i);
+		array = getRandomInputArray(size);
 	}
 	double sum1 = 0;
 	double sum2 = 0;
 	double A;
 	std::cout << "Введите значение А ";
 	std::cin >> A;
-	 summinus( array, size, sum1, i);
+	sum_minus(array, size, sum1, i);
 	double part1_of_a_pair = 0;
 	double part2_of_a_pair;
 	part(array, size, part1_of_a_pair, i, part2_of_a_pair);
 	std::cout << " сумма отрицательных элементов = " << sum1 << std::endl << " сумма элементов, значения которых положительны и не превосходят заданного числа А = " << sum2 << "номера последней пары соседних элементов с разными знаками=" << part1_of_a_pair << ", " << part2_of_a_pair << std::endl;
 	return (0);
 }
-void choice1(int* arrayD, int size, double element, int i)
+int getRandomInputArray(const size_t size, const int minValue, const int maxValue)
 {
-	for (i = 0; i < size;)
+	std::random_device random;
+	std::mt19937 gen(random());
+	const std::uniform_int_distribution<int> uniformDistrinbution(minValue, maxValue);
+
+	int* array = new int[size];
+	for (size_t i = 0; i < size; i++)
+	{
+		array[i] = uniformDistrinbution(gen);
+	}
+}
+void keyboard(const size_t size, double element)
+{
+	int* array = new int[size];
+	for (int i = 0; i < size; i++)
 	{
 		std::cin >> element;
-		arrayD[i] = element;
-		i += 1;
+		array[i] = element;
 	}
 }
-void choice2(int* arrayD, int size, double element, int i)
+void sum_minus(int* array, const size_t size, double sum1)
 {
-	for (int i = 0; i < size; ++i)
-	{
-		arrayD[i] = getRandom(-100, 100);
-		i += 1;
-	}
-}
-void summinus(int* array, int size, double sum1, int i)
-{
-	for (i = 0; i < size; i++)
+	int* array = new int[size];
+	for (int i = 0; i < size; i++)
 	{
 		if (array[i] < 0)
 		{
@@ -68,9 +95,10 @@ void summinus(int* array, int size, double sum1, int i)
 		}
 	}
 }
-void sumplusA(int* array, int size, double sum2, int i, double A)
+void sumplusA( int size, double sum2, double A)
 {
-	for ( i = 0; i < size; i++)
+	int* array = new int[size];
+	for (int i = 0; i < size; i++)
 	{
 		if (array[i] > 0)
 		{
@@ -81,9 +109,10 @@ void sumplusA(int* array, int size, double sum2, int i, double A)
 		}
 	}
 }
-void part(int* array, int size, double part1_of_a_pair, int i, double part2_of_a_pair)
+void part(int size, double part1_of_a_pair, double part2_of_a_pair)
 {
-	i = size - 1;
+	int* array = new int[size];
+	int i = size - 1;
 	while (part1_of_a_pair == 0)
 	{
 		if (array[i] > 0)
