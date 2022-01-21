@@ -1,5 +1,16 @@
 #include <iostream>
 #include <cmath>
+/**
+ * \brief Функция для расчета b
+ * \param k Параметр k
+ * \param factorial переменная, чтобы высчитать факториал k
+ * \return 
+ */
+double get_row(const double k, const double factorial);
+/**
+ * \brief Точка входа в программу
+ * \return Возвращает нуль, в случае успеха
+ */
 int main()
 { 
     std::cout << "Введите число n: ";
@@ -9,19 +20,23 @@ int main()
     double e;
     std::cin >> e;
     double k = 1;
-    double  z = 1;
-    double sum1 = 0;
-    double summ2 = 0;
+    double  factorial = 1;
+    double sum_e = 0;
+    double sum_n = 0;
     while (k<=n)
         { 
-            z = z*k;
-            double s =pow(-1,k)*k/z;
-            sum1 = sum1 +s;
+            factorial = factorial*k;
+            const auto row = get_row(k, factorial);
+            sum_n = sum_n +row;
             if (k>=e)
                 {
-                    summ2 = summ2 + s;
+                    sum_e = sum_e + row;
                 }
-            k=k+1;
+            k+=1;
         }
-    std::cout << "сумму первых  " << n << "  членов последовательности = " << sum1 << std::endl << "сумму всех членов последовательности, не меньших " << e << " = " << summ2 << std::endl;
+    std::cout << "сумму первых  " << n << "  членов последовательности = " << sum_n << std::endl << "сумму всех членов последовательности, не меньших " << e << " = " << sum_e << std::endl;
 }
+double get_row (const double k, const double factorial)
+{
+    return pow(-1,k)*k/factorial;
+} 
