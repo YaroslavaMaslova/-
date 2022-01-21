@@ -1,20 +1,40 @@
 #include <iostream>
-#include <time.h>
-int getRandom(int start, int end)
-{
-	return start + rand() % (end - start + 1);
-}
-void choice1(int* arrayD, int size, double element, int i);
-void choice2(int* arrayD, int size, double element, int i);
-void maxminus(int* arrayD, int size, int max_minus, int i, int size_i);
-void ArrayA(int* arrayD, int* arrayA, int size, int i, double k);
+#include <cmath>
+#include <random>
+/**
+* \brief Заполнение массива случайными числами.
+* \param size Длина массива.
+* \param minValue Минимальное значение массива.
+* \param maxValue Максимальное значение массива.
+* \return Массив.
+*/
+int getRandomInputArray(const size_t size, const int minValue = -100, const int maxValue = 200);
+/**
+* \brief Заполнение массива с помощью клавиатуры
+* \param size Длина массива.
+* \param element элемент
+* \return Массив.
+*/
+void keyboard(const size_t size, double element);
+/**
+* \brief Замена максимального отрицательного на ноль
+* \param max_minus максимальное отрицательное число
+* \param size_i номер максимального отрицательного числа
+* \return 0
+*/
+void maxminus(const size_t size, int max_minus, int size_i);
+/**
+* \brief появление ещё одного массива
+* \param  k условие для параметра
+* \return новый массив
+*/
+void newarray(const size_t size, double k);
 int main()
 {
 	std::cout << "введите количество элементов массива: ";
-	int* arrayD;
 	int size;
 	std::cin >> size;
-	arrayD = new int[size];
+	int* arrayD = new int[size];
 	std::cout << "заполняем клавиатурой или рандомом?" << std::endl << "1.клавиатура " << "2.рандом ";
 	double choice;
 	std::cin >> choice;
@@ -22,46 +42,51 @@ int main()
 	int i;
 	if (choice == 1)
 	{
-		choice1(arrayD, size, element, i);
+		keyboard(size, element);
 	}
 	if (choice == 2)
 	{
-		choice2(arrayD, size, element, i);
+		arrayD = getRandomInputArray(size);
 	}
 	int max_minus = -100;
 	int size_i = 0;
-	 maxminus(arrayD, size, max_minus, i, size_i);
-	int* arrayA;
-	arrayA = new int[size];
+	maxminus( size, max_minus, size_i);
+	int* arrayA = new int[size];
 	std::cout << "введите параметр k ";
 	double k;
 	std::cin >> k;
-	ArrayA(arrayD, arrayA, size, i, k);
+	newarray( size, k);
 	for (int i = 0; i < size; i++)
 	{
-		std::cout << "arrayD [" << i << "]= " << arrayD[i] << "      arrayA [" << i << "]= " << arrayA[i] << std::endl;
+		std::cout << "arrayD [" << i << "]= " << arrayD[i] << "     arrayA [" << i << "]= " << arrayA[i] << std::endl;
 	}
 }
-void choice1(int* arrayD, int size, double element, int i)
+int getRandomInputArray(const size_t size, const int minValue, const int maxValue)
 {
-	for ( i = 0; i < size;)
+	std::random_device random;
+	std::mt19937 gen(random());
+	const std::uniform_int_distribution<int> uniformDistrinbution(minValue, maxValue);
+
+	int* arrayD = new int[size];
+	for (size_t i = 0; i < size; i++)
+	{
+		arrayD[i] = uniformDistrinbution(gen);
+	}
+}
+void keyboard(const size_t size, double element)
+{
+	int* arrayD = new int[size];
+	for (size_t i = 0; i < size;)
 	{
 		std::cin >> element;
 		arrayD[i] = element;
 		i += 1;
 	}
 }
-void choice2(int* arrayD, int size, double element, int i)
+void maxminus(const size_t size, int max_minus, int size_i)
 {
-	for (int i = 0; i < size; ++i)
-	{
-		arrayD[i] = getRandom(-100, 100);
-		i += 1;
-	}
-}
-void maxminus(int* arrayD, int size, int max_minus, int i, int size_i)
-{
-	for ( i = 0; i < size; i++)
+	int* arrayD = new int[size];
+	for (size_t i = 0; i < size; i++)
 	{
 		if (arrayD[i] < 0)
 		{
@@ -74,9 +99,11 @@ void maxminus(int* arrayD, int size, int max_minus, int i, int size_i)
 	}
 	arrayD[size_i] = 0;
 }
-void ArrayA(int* arrayD, int* arrayA, int size, int i, double k)
+void newarray(  const size_t size, double k)
 {
-	for ( i = 0; i < size;)
+	int* arrayD = new int[size];
+	int* arrayA = new int[size];
+	for (size_t i = 0; i < size;)
 	{
 		if (arrayD[i] < k)
 		{
